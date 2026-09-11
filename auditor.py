@@ -1,17 +1,22 @@
 inventory = 0
 total_stock = 0
+Rejected_entry = 0
 while True:
     stock_value = input("Please enter the stock quantity: ")
     if stock_value == "Quit" or stock_value == "quit":
+        print("Total units processed:", total_stock)
+        print("Number of failed or rejected entries:", Rejected_entry)
         break
     elif stock_value.isdigit() == False:
         print("Please enter a valid stock quantity.")
+        Rejected_entry += 1
         continue
 
     stock_value = int(stock_value)
 
     if stock_value < 0:
         print("Stock quantity cannot be negative.")
+        Rejected_entry += 1
         continue
 
     total_stock += stock_value

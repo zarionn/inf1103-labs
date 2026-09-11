@@ -1,4 +1,5 @@
 inventory = 0
+total_stock = 0
 while True:
     stock_value = input("Please enter the stock quantity: ")
     if stock_value == "Quit" or stock_value == "quit":
@@ -12,3 +13,5 @@ while True:
     if stock_value < 0:
         print("Stock quantity cannot be negative.")
         continue
+    
+    total_stock += stock_value

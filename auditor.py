@@ -13,5 +13,9 @@ while True:
     if stock_value < 0:
         print("Stock quantity cannot be negative.")
         continue
-    
+
     total_stock += stock_value
+
+    if total_stock > 500:
+        print("Alert: total stock has exceeded the maximum capacity.")
+        break

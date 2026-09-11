@@ -1,10 +1,9 @@
 inventory = 0
-total_stock = 0
 Rejected_entry = 0
 while True:
     stock_value = input("Please enter the stock quantity: ")
     if stock_value == "Quit" or stock_value == "quit":
-        print("Total units processed:", total_stock)
+        print("Total units processed:", inventory)
         print("Number of failed or rejected entries:", Rejected_entry)
         break
     elif stock_value.isdigit() == False:
@@ -19,8 +18,8 @@ while True:
         Rejected_entry += 1
         continue
 
-    total_stock += stock_value
+    inventory += stock_value
 
-    if total_stock > 500:
+    if inventory > 500:
         print("Alert: total stock has exceeded the maximum capacity.")
         break

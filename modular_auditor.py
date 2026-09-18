@@ -41,5 +41,13 @@ def process_delivery(current_total, new_value):
     new_total = current_total + new_value
     return new_total
 
+def calculate_tax(amount):
+    tax = 0.1 * amount
+    return tax
+
+
+
+
+
         
             

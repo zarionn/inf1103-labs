@@ -1,41 +1,20 @@
 inventory = 0
 Rejected_entry = 0
-# while True:
-#     stock_value = input("Please enter the stock quantity: ")
-#     if stock_value == "Quit" or stock_value == "quit":
-#         print("Total units processed:", inventory)
-#         print("Number of failed or rejected entries:", Rejected_entry)
-#         break
-#     elif stock_value.isdigit() == False:
-#         print("Please enter a valid stock quantity.")
-#         Rejected_entry += 1
-#         continue
-
-#     stock_value = int(stock_value)
-
-#     if stock_value < 0:
-#         print("Stock quantity cannot be negative.")
-#         Rejected_entry += 1
-#         continue
-
-#     inventory += stock_value
-
-#     if inventory > 500:
-#         print("Alert: total stock has exceeded the maximum capacity.")
-#         break
+deliveries = 0
 
 def get_valid_input():
-    global Rejected_entry
+    Rejected_entry = 0
     while True:
         stock_value = input("Please enter the stock quantity: ")
         if stock_value == "Quit" or stock_value == "quit":
-            return "quit"
+            return "quit", Rejected_entry
             
         elif stock_value.isdigit() == False:
             print("Please enter a valid stock quantity.")
             Rejected_entry += 1
             continue
-        return int(stock_value)
+
+        return int(stock_value), Rejected_entry
 
 def process_delivery(current_total, new_value):
     new_total = current_total + new_value
@@ -47,10 +26,18 @@ def calculate_tax(amount):
 
 def generate_report(total_units, failed_attempts):
     print("Number of failed or rejected entries:", failed_attempts)
-    print("Total units processed:", total_units)
+    print("Total deliveries processed:", total_units)
 
 
-
-
-        
-            
+while True:
+    stock_value, rejected = get_valid_input()
+    Rejected_entry += rejected
+    if stock_value == "quit":
+        generate_report(deliveries, Rejected_entry)
+        break
+    inventory = process_delivery(inventory, stock_value)
+    deliveries += 1
+    tax = calculate_tax(stock_value)
+    if inventory > 500:
+        print("Alert: total stock has exceeded the maximum capacity.")
+        break

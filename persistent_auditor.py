@@ -40,16 +40,22 @@ def load_inventory():
     else:
         return 0, transaction_history
 
-def save_inventory():
+def save_inventory(inventory, transaction_history):
+    with open("inventory.txt", "w") as file:
+        file.write(str(inventory) + "\n")
+        for item in transaction_history:
+            file.write(str(item) + "\n")
     return
+
 inventory, transaction_history = load_inventory()
 while True:
     stock_value, rejected = get_valid_input()
     Rejected_entry += rejected
     if stock_value == "quit":
         generate_report(deliveries, Rejected_entry)
-        print(transaction_history)
+        save_inventory(inventory, transaction_history)
         break
+
     inventory = process_delivery(inventory, stock_value)
     deliveries += 1
     transaction_history.append(stock_value)

@@ -55,6 +55,11 @@ def load_inventory():
         print("inventory.json not found, starting with empty inventory.")
         return []
 
+
+def save_inventory(inventory):
+    with open("inventory.json", "w") as file:
+        json.dump(inventory, file, indent=4)
+
 def menu():
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
@@ -94,8 +99,13 @@ def menu():
             else:
                 print("Product not found.")
         elif option == "5":
-            pass
+            print("Saving inventory...")
+            save_inventory(inventory)
+            print("Inventory saved successfully to inventory.json.")
         elif option == "6":
+            print("Saving inventory before exit...")
+            save_inventory(inventory)
+            print("Inventory saved successfully.\n")
             print("Thank you for using Inventory Management System")
             print("Program terminated.")
             break

@@ -24,6 +24,34 @@ class Product:
     def to_dict(self):
         return {"ID": self.__product_id, "Name": self.__name, "Price": self.__price, "stock": self.__stock}
 
+
+class Inventory:
+    def __init__(self):
+        self.__products = []
+
+
+    def add_product(self, product):
+        self.__products.append(product)
+
+
+    def search_product(self, product_id):
+        for item in self.__products:
+            if item.get_product_id() == product_id:
+                return item
+        return None
+
+
+    def display_all(self):
+        print("Current Inventory")
+        print("------------------------------------------------")
+        for item in self.__products:
+            item.display_information()
+        print("------------------------------------------------")
+        return None
+
+    def get_all(self):
+        return self.__products
+
 def add_product(inventory):
     try:
         (print("\nAdd New Product"))

@@ -15,8 +15,9 @@ class Product:
     def update_stock(self, quantity):
         if quantity < 0:
             print("Stock cannot be negative")
-            return
+            return False
         self.__stock = quantity
+        return True
 
     def display_information(self):
         print(f"ID: {self.__product_id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__stock}")
@@ -54,26 +55,33 @@ class Inventory:
 
 
 def load_inventory():
+    inventory = Inventory()
     if os.path.exists("inventory.json"):
         print("inventory.json found.")
         with open("inventory.json", "r") as file:
-            inventory = json.load(file)
+            data = json.load(file)
+        for item in data:
+            product = Product(item["ID"], item["Name"], item["Price"], item["stock"])
+            inventory.add_product(product)
         print("Inventory loaded successfully.")
         return inventory
     else:
         print("inventory.json not found, starting with empty inventory.")
-        return []
+        return inventory
 
 
 def save_inventory(inventory):
+    data = []
+    for product in inventory.get_all():
+        data.append(product.to_dict())
     with open("inventory.json", "w") as file:
-        json.dump(inventory, file, indent=4)
+        json.dump(data, file, indent=4)
 
 def menu():
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
     print("========================================")
-    inventory = Inventory()
+    inventory = load_inventory()
     print("\n----------- MENU -----------")
     print("1. Display All Products")
     print("2. Add Product")
@@ -108,8 +116,8 @@ def menu():
                 print("Product Found:")
                 item.display_information()
                 new_quantity = int(input("New Stock Quantity: "))
-                item.update_stock(new_quantity)
-                print("Stock updated successfully!")
+                if item.update_stock(new_quantity):
+                    print("Stock updated successfully!")
             else:
                 print("Product not found")
         elif option == "4":

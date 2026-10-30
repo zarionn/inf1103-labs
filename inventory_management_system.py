@@ -26,6 +26,17 @@ class Product:
         return {"ID": self.__product_id, "Name": self.__name, "Price": self.__price, "stock": self.__stock}
 
 
+class PhysicalProduct(Product):
+    def __init__(self, product_id, name, price, stock, weight):
+        super().__init__(product_id, name, price, stock)
+        self.__weight = weight
+
+    def display_information(self):
+        super().display_information()
+        print(f"Weight: {self.__weight} kg")
+
+        
+
 class Inventory:
     def __init__(self):
         self.__products = []
@@ -40,15 +51,6 @@ class Inventory:
             if item.get_product_id() == product_id:
                 return item
         return None
-
-class PhysicalProduct(Product):
-    def __init__(self, product_id, name, price, stock, weight):
-        super().__init__(product_id, name, price, stock)
-        self.__weight = weight
-
-    def display_information(self):
-        super().display_information()
-        print(f"Weight: {self.__weight} kg")
 
     def display_all(self):
         print("Current Inventory")

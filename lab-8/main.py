@@ -1,13 +1,15 @@
 from digital_product import DigitalProduct
 from physical_product import PhysicalProduct
 from inventory import Inventory
+from supplier import Supplier
 
 def menu():
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
     print("========================================")
+    default_supplier = Supplier("S001", "General Supplies Pte Ltd", "sales@generalsupplies.com")
     inventory = Inventory()
-    inventory.load()
+    inventory.load(default_supplier)
     print("\n----------- MENU -----------")
     print("1. Display All Products")
     print("2. Add Product")
@@ -34,10 +36,10 @@ def menu():
                 stock = int(input("Stock Quantity: "))
                 if product_type == "p":
                     weight = float(input("Weight(kg): "))
-                    product = PhysicalProduct(product_id, name, price, stock, weight)
+                    product = PhysicalProduct(product_id, name, price, stock, weight, default_supplier)
                 else:
                     download_size = float(input("Download Size(MB): "))
-                    product = DigitalProduct(product_id, name, price, stock, download_size)
+                    product = DigitalProduct(product_id, name, price, stock, download_size, default_supplier)
                 inventory.add_product(product)
                 print("\nProduct added successfully")
             except ValueError:

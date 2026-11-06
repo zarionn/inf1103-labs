@@ -2,6 +2,7 @@ import json
 import os
 from digital_product import DigitalProduct
 from physical_product import PhysicalProduct
+from supplier import Supplier
 
 
 class Inventory:
@@ -37,16 +38,16 @@ class Inventory:
         with open("inventory.json", "w") as file:
             json.dump(data, file, indent=4)
 
-    def load(self):
+    def load(self, default_supplier: Supplier) -> None:
         if os.path.exists("inventory.json"):
             print("inventory.json found.")
             with open("inventory.json", "r") as file:
                 data = json.load(file)
             for item in data:
                 if item.get("type") == "digital":
-                    product = DigitalProduct(item["ID"], item["Name"], item["Price"], item["stock"], item["download_size"])
+                    product = DigitalProduct(item["ID"], item["Name"], item["Price"], item["stock"], item["download_size"], default_supplier)
                 else:
-                    product = PhysicalProduct(item["ID"], item["Name"], item["Price"], item["stock"], item.get("weight", 1.0))
+                    product = PhysicalProduct(item["ID"], item["Name"], item["Price"], item["stock"], item.get("weight", 1.0), default_supplier)
                 self.add_product(product)
             print("Inventory loaded successfully.")
         else:

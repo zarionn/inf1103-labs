@@ -1,0 +1,74 @@
+[
+    {
+        "ID": "P001",
+        "Name": "Laptop",
+        "Price": 1200.0,
+        "stock": 15,
+        "type": "physical",
+        "weight": 1.0
+    },
+    {
+        "ID": "P002",
+        "Name": "Mouse",
+        "Price": 25.5,
+        "stock": 40,
+        "type": "physical",
+        "weight": 1.0
+    },
+    {
+        "ID": "P003",
+        "Name": "Keyboard",
+        "Price": 45.0,
+        "stock": 25,
+        "type": "physical",
+        "weight": 1.0
+    },
+    {
+        "ID": "P004",
+        "Name": "Monitor",
+        "Price": 299.99,
+        "stock": 10,
+        "type": "physical",
+        "weight": 1.0
+    },
+    {
+        "ID": "P005",
+        "Name": "Phone",
+        "Price": 900.0,
+        "stock": 30,
+        "type": "physical",
+        "weight": 1.0
+    },
+    {
+        "ID": "P010",
+        "Name": "Keyboard",
+        "Price": 49.9,
+        "stock": 50,
+        "type": "physical",
+        "weight": 1.0
+    },
+    {
+        "ID": "P020",
+        "Name": "Headphones",
+        "Price": 89.9,
+        "stock": 20,
+        "type": "physical",
+        "weight": 1.0
+    },
+    {
+        "ID": "P200",
+        "Name": "Guitar",
+        "Price": 350.0,
+        "stock": 10,
+        "type": "physical",
+        "weight": 3.5
+    },
+    {
+        "ID": "D200",
+        "Name": "Windows 11",
+        "Price": 199.0,
+        "stock": 50,
+        "type": "digital",
+        "download_size": 5000.0
+    }
+]

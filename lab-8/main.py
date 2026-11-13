@@ -3,7 +3,7 @@ from physical_product import PhysicalProduct
 from inventory import Inventory
 from supplier import Supplier
 
-def menu():
+def menu() -> None:
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
     print("========================================")

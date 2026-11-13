@@ -70,5 +70,21 @@
         "stock": 50,
         "type": "digital",
         "download_size": 5000.0
+    },
+    {
+        "ID": "P600",
+        "Name": "Bookshelf",
+        "Price": 150.0,
+        "stock": 8,
+        "type": "physical",
+        "weight": 12.5
+    },
+    {
+        "ID": "D600",
+        "Name": "Video Course",
+        "Price": 49.9,
+        "stock": 100,
+        "type": "digital",
+        "download_size": 2500.0
     }
 ]

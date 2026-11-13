@@ -13,6 +13,12 @@ class Product(ABC):
     def get_product_id(self) -> str:
         return self.__product_id
 
+    def get_price(self) -> float:
+        return self.__price
+
+    def get_name(self) -> str:
+        return self.__name
+
     def update_stock(self, quantity: int) -> bool:
         if quantity < 0:
             print("Stock cannot be negative")

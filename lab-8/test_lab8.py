@@ -3,6 +3,7 @@ from physical_product import PhysicalProduct
 from digital_product import DigitalProduct
 from inventory import Inventory
 from order import Order
+from product import Product
 
 
 def test_association() -> None:
@@ -84,7 +85,35 @@ def test_composition() -> None:
     order1.remove_order_line("P300")
     order1.display_order()
 
+
+def show_product_details(product: Product) -> None:
+    product.display_information()
+    print(product.get_fulfilment_info())
+
+
+def test_lsp() -> None:
+    print("\n=== Testing LSP: substitutability of Product subclasses ===")
+    supplier = Supplier("S400", "MegaStore", "contact@megastore.com")
+    p1 = PhysicalProduct("P400", "Monitor", 299.99, 8, 4.2, supplier)
+    d1 = DigitalProduct("D400", "Photo Editor", 79.00, 200, 1500.0, supplier)
+
+    print("\nshow_product_details() with a PhysicalProduct:")
+    show_product_details(p1)
+
+    print("\nshow_product_details() with a DigitalProduct:")
+    show_product_details(d1)
+
+    print("\nBoth types in one Inventory, using normal operations:")
+    inventory = Inventory()
+    inventory.add_product(p1)
+    inventory.add_product(d1)
+    inventory.display_all()
+    print("update_stock on physical:", inventory.update_stock("P400", 12))
+    print("update_stock on digital:", inventory.update_stock("D400", 180))
+    print("find_product D400:", inventory.find_product("D400") is d1)
+
 if __name__ == "__main__":
     test_association()
     test_aggregation()
     test_composition()
+    test_lsp()

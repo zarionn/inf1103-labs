@@ -3,24 +3,25 @@ import os
 from digital_product import DigitalProduct
 from physical_product import PhysicalProduct
 from supplier import Supplier
+from product import Product
 
 
 class Inventory:
-    def __init__(self):
-        self.__products = []
+    def __init__(self) -> None:
+        self.__products : list[Product ] = []
 
 
-    def add_product(self, product):
+    def add_product(self, product: Product) -> None:
         self.__products.append(product)
 
 
-    def search_product(self, product_id):
+    def find_product(self, product_id: str) -> Product | None:
         for item in self.__products:
             if item.get_product_id() == product_id:
                 return item
         return None
 
-    def display_all(self):
+    def display_all(self) -> None:
         print("Current Inventory")
         print("------------------------------------------------")
         for item in self.__products:
@@ -28,10 +29,10 @@ class Inventory:
         print("------------------------------------------------")
         return None
 
-    def get_all(self):
+    def get_all(self) -> list[Product]:
         return self.__products
 
-    def save(self):
+    def save(self) -> None:
         data = []
         for product in self.__products:
             data.append(product.to_dict())
@@ -53,10 +54,15 @@ class Inventory:
         else:
             print("inventory.json not found, starting with empty inventory.")
 
-    def update_stock(self, product_id, new_quantity):
-        item = self.search_product(product_id)
+    def update_stock(self, product_id: str, new_quantity: int) -> bool:
+        item = self.find_product(product_id)
         if item:
             return item.update_stock(new_quantity)
         else:
             print("Product not found")
             return False
+
+    def remove_product(self, product_id: str) -> None:
+        product = self.find_product(product_id)
+        if product:
+            self.__products.remove(product)

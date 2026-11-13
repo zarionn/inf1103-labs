@@ -48,7 +48,7 @@ def menu():
         elif option == "3":
             print("Update Stock")
             product_id = input("Enter Product ID:")
-            item = inventory.search_product(product_id)
+            item = inventory.find_product(product_id)
             if item:
                 print("Product Found:")
                 item.display_information()
@@ -60,7 +60,7 @@ def menu():
         elif option == "4":
             print("Search Product")
             product_id = input("Enter Product ID:")
-            item = inventory.search_product(product_id)
+            item = inventory.find_product(product_id)
             if item:
                 print("\nProduct Found")
                 print("------------------------------------------------")

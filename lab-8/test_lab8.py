@@ -112,8 +112,22 @@ def test_lsp() -> None:
     print("update_stock on digital:", inventory.update_stock("D400", 180))
     print("find_product D400:", inventory.find_product("D400") is d1)
 
+
+def test_polymorphism() -> None:
+    print("\n=== Testing polymorphism through the Product collection ===")
+    supplier = Supplier("S500", "AllGoods", "info@allgoods.com")
+    inventory = Inventory()
+    inventory.add_product(PhysicalProduct("P500", "Chair", 85.00, 20, 6.0, supplier))
+    inventory.add_product(DigitalProduct("D500", "Music Pack", 12.50, 500, 300.0, supplier))
+
+    for product in inventory.get_all():
+        product.display_information()
+        print(product.get_fulfilment_info())
+        print()
+
 if __name__ == "__main__":
     test_association()
     test_aggregation()
     test_composition()
     test_lsp()
+    test_polymorphism()

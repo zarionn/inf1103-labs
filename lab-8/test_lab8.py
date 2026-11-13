@@ -2,6 +2,7 @@ from supplier import Supplier
 from physical_product import PhysicalProduct
 from digital_product import DigitalProduct
 from inventory import Inventory
+from order import Order
 
 
 def test_association() -> None:
@@ -50,6 +51,40 @@ def test_aggregation() -> None:
 
     print("\nSame object in Inventory B?", inventory_b.find_product("P200") is p1)
 
+
+def test_composition() -> None:
+    print("\n=== Testing composition between Order and OrderLine ===")
+    supplier = Supplier("S300", "OfficeMart", "orders@officemart.com")
+    p1 = PhysicalProduct("P300", "Desk", 120.00, 10, 15.0, supplier)
+    d1 = DigitalProduct("D300", "Antivirus", 39.90, 100, 800.0, supplier)
+
+    # Order 1 with two products
+    order1 = Order("O001")
+    order1.add_order_line(p1, 2)
+    order1.add_order_line(d1, 1)
+    print("\nOrder 1:")
+    order1.display_order()
+
+    # Same product (p1) added to a different order
+    order2 = Order("O002")
+    order2.add_order_line(p1, 5)
+    print("\nOrder 2:")
+    order2.display_order()
+
+    # Predict-first check: compare the objects
+    line_in_order1 = order1.get_order_lines()[0]
+    line_in_order2 = order2.get_order_lines()[0]
+    print("\nSame OrderLine object?", line_in_order1 is line_in_order2)
+    print("Same Product object?", line_in_order1.get_product() is line_in_order2.get_product())
+    print("OrderLine ids:", id(line_in_order1), id(line_in_order2))
+    print("Product ids:", id(line_in_order1.get_product()), id(line_in_order2.get_product()))
+
+    # Remove an order line through the Order
+    print("\nRemoving P300 from Order 1:")
+    order1.remove_order_line("P300")
+    order1.display_order()
+
 if __name__ == "__main__":
     test_association()
     test_aggregation()
+    test_composition()

@@ -4,6 +4,18 @@ from inventory import Inventory
 from supplier import Supplier
 from product_factory import ProductFactory
 
+def get_positive_float(prompt: str) -> float:
+    while True:
+        try:
+            value = float(input(prompt))
+            if value <= 0:
+                print("Please enter a number greater than zero.")
+                continue
+            return value
+        except ValueError:
+            print("Please enter a valid number, e.g. 12.50")
+
+
 def menu() -> None:
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
@@ -33,7 +45,7 @@ def menu() -> None:
                     continue
                 product_id = input("Product ID: ")
                 name = input("Product Name: ")
-                price = float(input("Product Price: "))
+                price = get_positive_float("Product Price: ")
                 stock = int(input("Stock Quantity: "))
                 if product_type == "p":
                     weight = float(input("Weight(kg): "))

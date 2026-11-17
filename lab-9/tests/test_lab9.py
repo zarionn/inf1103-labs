@@ -5,6 +5,8 @@ from bulk_discount import BulkDiscount
 from percentage_discount import PercentageDiscount
 from student_discount import StudentDiscount
 from product_factory import ProductFactory
+from product_loader import load_products
+from inventory import Inventory
 
 
 def test_strategy() -> None:
@@ -34,6 +36,18 @@ def test_factory() -> None:
         print("ValueError caught:", error)
 
 
+def test_load_products() -> None:
+    print("\n=== Testing load_products with products.csv ===")
+    supplier = Supplier("S300", "CSV Supplies", "csv@supplies.com")
+    inventory = Inventory()
+    load_products("products.csv", inventory, supplier)
+    inventory.display_all()
+
+    print("\n=== Testing load_products with a missing file ===")
+    load_products("missing_products.csv", Inventory(), supplier)
+
+
 if __name__ == "__main__":
     test_strategy()
     test_factory()
+    test_load_products()

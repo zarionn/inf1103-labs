@@ -43,21 +43,24 @@ def menu() -> None:
                     product = ProductFactory.create("digital", product_id, name, price, stock, default_supplier, download_size=download_size)
                 inventory.add_product(product)
                 print("\nProduct added successfully")
-            except ValueError:
-                print("Invalid input. Please enter valid data types for price and stock")
+            except ValueError as error:
+                print(f"Invalid input: {error}")
             
         elif option == "3":
-            print("Update Stock")
-            product_id = input("Enter Product ID:")
-            item = inventory.find_product(product_id)
-            if item:
-                print("Product Found:")
-                item.display_information()
-                new_quantity = int(input("New Stock Quantity: "))
-                if inventory.update_stock(product_id, new_quantity):
-                    print("Stock updated successfully!")
-            else:
-                print("Product not found")
+            try:
+                print("Update Stock")
+                product_id = input("Enter Product ID:")
+                item = inventory.find_product(product_id)
+                if item:
+                    print("Product Found:")
+                    item.display_information()
+                    new_quantity = int(input("New Stock Quantity: "))
+                    if inventory.update_stock(product_id, new_quantity):
+                        print("Stock updated successfully!")
+                else:
+                    print("Product not found")
+            except ValueError as error:
+                print(f"Invalid input: {error}")
         elif option == "4":
             print("Search Product")
             product_id = input("Enter Product ID:")

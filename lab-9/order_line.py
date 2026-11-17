@@ -2,6 +2,8 @@ from product import Product
 
 class OrderLine:
     def __init__(self, product: Product, quantity: int) -> None:
+        if quantity <= 0:
+            raise ValueError("Quantity must be greater than 0")
         self.__quantity: int = quantity
         self.__product: Product = product
 

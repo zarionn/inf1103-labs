@@ -2,6 +2,7 @@ from digital_product import DigitalProduct
 from physical_product import PhysicalProduct
 from inventory import Inventory
 from supplier import Supplier
+from product_factory import ProductFactory
 
 def menu() -> None:
     print("========================================")
@@ -36,10 +37,10 @@ def menu() -> None:
                 stock = int(input("Stock Quantity: "))
                 if product_type == "p":
                     weight = float(input("Weight(kg): "))
-                    product = PhysicalProduct(product_id, name, price, stock, weight, default_supplier)
+                    product = ProductFactory.create("physical", product_id, name, price, stock, default_supplier, weight=weight)
                 else:
                     download_size = float(input("Download Size(MB): "))
-                    product = DigitalProduct(product_id, name, price, stock, download_size, default_supplier)
+                    product = ProductFactory.create("digital", product_id, name, price, stock, default_supplier, download_size=download_size)
                 inventory.add_product(product)
                 print("\nProduct added successfully")
             except ValueError:

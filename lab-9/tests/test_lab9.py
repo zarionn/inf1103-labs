@@ -4,6 +4,7 @@ from order import Order
 from bulk_discount import BulkDiscount
 from percentage_discount import PercentageDiscount
 from student_discount import StudentDiscount
+from product_factory import ProductFactory
 
 
 def test_strategy() -> None:
@@ -24,6 +25,15 @@ def test_strategy() -> None:
     order.set_discount(StudentDiscount())
     print("Total after set_discount(StudentDiscount()):", order.calculate_total())
 
+def test_factory() -> None:
+    print("\n=== Testing ProductFactory with an unknown type ===")
+    supplier = Supplier("S200", "ServiceCo", "help@serviceco.com")
+    try:
+        ProductFactory.create("service", "S001", "Installation", 30.00, 5, supplier)
+    except ValueError as error:
+        print("ValueError caught:", error)
+
 
 if __name__ == "__main__":
     test_strategy()
+    test_factory()
